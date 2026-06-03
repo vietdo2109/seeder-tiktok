@@ -3,7 +3,7 @@ setlocal enabledelayedexpansion
 
 set "CHROME=C:\Program Files\Google\Chrome\Application\chrome.exe"
 set "BASE_PROFILE_DIR=C:\ChromeProfiles"
-set "COMMON_FLAGS=--disable-background-timer-throttling --disable-renderer-backgrounding --disable-backgrounding-occluded-windows --remote-allow-origins=* --disable-popup-blocking --no-first-run"
+set "COMMON_FLAGS=--disable-background-timer-throttling --disable-renderer-backgrounding --disable-backgrounding-occluded-windows --remote-allow-origins=* --disable-popup-blocking --no-first-run --disk-cache-size=104857600 --media-cache-size=104857600"
 
 if not exist "%CHROME%" (
     echo ERROR: Chrome not found at %CHROME%

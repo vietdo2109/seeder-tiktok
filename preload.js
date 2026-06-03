@@ -5,4 +5,5 @@ contextBridge.exposeInMainWorld('electronAPI', {
   onLog: (callback) => ipcRenderer.on('log-message', (_, value) => callback(value)),
   openCommentsFile: () => ipcRenderer.send('open-comments'),
   saveLogs: (content) => ipcRenderer.invoke('save-logs', content),
+  clearChromeCache: () => ipcRenderer.invoke('clear-chrome-cache'),
 });

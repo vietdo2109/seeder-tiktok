@@ -50,6 +50,23 @@ document.getElementById('editBtn').addEventListener('click', () => {
   window.electronAPI.openCommentsFile();
 });
 
+document.getElementById('clearCacheBtn').addEventListener('click', async () => {
+  const confirmed = confirm('Clear Chrome cache for Profile1-Profile10?\n\nClose Chrome first for the best result. Login sessions will be preserved.');
+  if (!confirmed) return;
+
+  appendLog('[INFO] Clearing Chrome cache...\n');
+  const result = await window.electronAPI.clearChromeCache();
+  if (result?.ok) {
+    appendLog(`[SUCCESS] Cleared ${result.deletedPaths} cache folders, freed about ${result.freedMb || 0} MB.\n`);
+    return;
+  }
+
+  appendLog(`[WARN] Cache cleanup finished with ${result?.errors?.length || 0} errors. Freed about ${result?.freedMb || 0} MB.\n`);
+  for (const item of result?.errors || []) {
+    appendLog(`[ERROR] Could not delete ${item.path}: ${item.error}\n`);
+  }
+});
+
 document.getElementById('clearLogBtn').addEventListener('click', () => {
   logContainer.innerHTML = '';
   rawLogContent = '';
